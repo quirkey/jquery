@@ -76,8 +76,14 @@ jQuery.fn.extend({
 		return this.pushStack( winnow(this, selector, true), "filter", selector );
 	},
 	
-	is: function( selector ) {
-		return !!selector && jQuery.filter( selector, this ).length > 0;
+	is: function( selector, callback ) {
+		var ret = !!selector && jQuery.filter( selector, this ).length > 0;
+		
+		if (ret && jQuery.isFunction(callback)) {
+		  callback.apply(this);
+		}
+		
+		return ret;
 	},
 
 	closest: function( selectors, context ) {

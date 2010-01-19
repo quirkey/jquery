@@ -41,6 +41,17 @@ test("is(String)", function() {
 	ok( jQuery('#en').is('[lang="de"] , [lang="en"]'), 'Comma-seperated; Check for lang attribute: Expect en or de' );
 });
 
+test("is(String,Function)", function() {
+  expect(4);
+  
+  var returned = null;
+  ok( !jQuery('#mark').is('.link', function() { returned = true; }), 'Check for class: Did not expect class "link"' );
+  ok( !returned, 'Check for callback: Callback should not run' );
+  
+  ok( jQuery('#mark').is('.blog', function() { returned = true; }), 'Check for class: Expected class "blog"' );
+	ok( returned, 'Check for callback: callback should run');
+});
+
 test("index()", function() {
 	expect(1);
 
